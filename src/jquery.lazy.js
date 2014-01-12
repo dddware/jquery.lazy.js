@@ -1,5 +1,5 @@
 /**
- * Tao - jquery.lazy.js
+ * Lazy - jquery.lazy.js
  * Lazy-loaded images
  *
  * @author neemzy <tom.panier@free.fr>
@@ -23,47 +23,15 @@
                     },
 
                     prepareTargets: function() {
-                        var $targets = this.getTargets(),
+                        var $targets = Lazy.getTargets(),
                             length = $targets.length,
                             $result;
 
-                        // Put images to lazyload into containers
-                        $targets.each(function (index) {
-                            var $img = $(this),
-                                display = $img.css('display');
+                        $targets.attr('data-src', function () {
+                            return $(this).attr('src');
+                        }).removeAttr('src').css('opacity', 0);
 
-                            // Unset source to prevent loading
-                            $img.attr('data-src', function () {
-                                return $(this).attr('src');
-                            });
-
-                            $img.removeAttr('src');
-
-                            if (display == 'inline') {
-                                display = 'inline-block';
-                            }
-
-                            // Hide image to be able to fade it in later
-                            $img.css('opacity', 0);
-
-                            // Give the container the image's dimensions, a correct display value
-                            // and a loading spinner as a background
-                            $div = $('<div></div>')
-                                .width($img.width())
-                                .height($img.height())
-                                .css('display', display)
-                                .css('background', 'url("http://www.labosante.com/components/ajaxWishList/images/loading.gif") no-repeat center center');
-
-                            // Indiana Jones
-                            $img.clone().appendTo($div);
-                            $img.replaceWith($div);
-
-                            if (index == length - 1) {
-                                $result = Lazy.getTargets();
-                            }
-                        });
-
-                        return $result;
+                        return $targets;
                     },
 
                     init: function() {

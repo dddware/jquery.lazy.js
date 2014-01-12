@@ -5,11 +5,11 @@ Lazy-loaded images
 
 ## About
 
-This plugin will lazy-load the `img` elements you call it upon, wrapping them in \div\s to preserve the space they will occupy and fill it with a loading spinner animation. Images are loaded and displayed once scrolled upon (and on page load if they are in the viewport).
+This plugin will lazy-load the `img` elements you call it upon. Images are then loaded and displayed once scrolled upon (and on page load if they are in the viewport). You **must** specify the images' sizes in either HTML or CSS for it to work properly.
 
 ## Usage
 
-`$('.im-so').lazy();`
+`$('img.lazy').lazy();`
 
 ## Build
 
